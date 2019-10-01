@@ -3,15 +3,34 @@
 #include <cmath>
 #include <string>
 using namespace std;
+bool notNumber(char a){
+    char letras[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    for( int i  = 0; i < 26; i++)
+        if (letras[i] == a)
+            return true;
+    return false;
+}
 bool isSolved(string celda){
     return celda[0] != '=';
 }
 int finalIndex(char ind){
-    char letras[27] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-    for( int i  = 0; i < 27; i++)
+    char letras[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    for( int i  = 0; i < 26; i++)
         if (letras[i] == ind)
             return i;
     return 0;
+}
+
+int final(string a){
+    if (a.size() == 1){
+        return finalIndex(a[0]);
+    }
+    else if (a.size() == 2){
+        return 26*(finalIndex(a[0])+1) + finalIndex(a[1])+1;
+    }
+    else{
+        return 1;
+    }
 }
 string getCelvalue(string &celda, string** celdas){
     if(isSolved(celda)){
@@ -30,6 +49,7 @@ string getCelvalue(string &celda, string** celdas){
             if(i == celda.size()-1)
                 subcels.push_back(f);
         }
+        //cambiar parte
         for(int i  = 0; i  < subcels.size(); i++){
             int column = finalIndex(subcels[i][0]);
             char a = subcels[i][1];
@@ -38,6 +58,7 @@ string getCelvalue(string &celda, string** celdas){
             row = ia-1;
             subcels[i] = getCelvalue(celdas[row][column], celdas);
         }
+        //aca
         int finalRes = 0;
         for(int i = 0; i < subcels.size(); i++){
             finalRes = finalRes + stoi(subcels[i]);
@@ -62,8 +83,7 @@ void print(string** celdas,int filas, int columnas){
         cout << endl;
     }
 }
-int main(){
-
+int main() {
     int filas,columnas;
     cin >> columnas >> filas;
     string ** celdas;
@@ -79,12 +99,19 @@ int main(){
     solveMat(celdas,filas,columnas);
     print(celdas,filas,columnas);
 
+
+
 }
 
-
-
-
-
-
-
-
+//string a = "AA22";
+//string index ;
+//string column;
+//for (int i = 0; i < a.size(); i++) {
+//if(notNumber(a[i])){
+//column = column + a[i];
+//}
+//else{
+//index = index + a[i];
+//}
+//}
+//cout << column  << " " << index;
