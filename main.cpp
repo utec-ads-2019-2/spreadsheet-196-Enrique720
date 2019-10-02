@@ -47,7 +47,6 @@
                 if (i == celda.size() - 1)
                     subcels.push_back(f);
             }
-            //cambiar parte
             for (int i = 0; i < subcels.size(); i++) {
                 string index;
                 string column;
@@ -64,7 +63,7 @@
                 row = stoi(index);
                 subcels[i] = getCelvalue(celdas[row-1][fin_col], celdas);
                 }
-                //aca
+              
                 int finalRes = 0;
                 for (int i = 0; i < subcels.size(); i++) {
                     finalRes = finalRes + stoi(subcels[i]);
@@ -90,7 +89,6 @@
                 }else{
                     cout<<celdas[a][b];
                 }
-
             }cout<<endl;
         }
     }
